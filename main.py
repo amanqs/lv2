@@ -1,12 +1,9 @@
-#
-# Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/YukkiChatBot >.
-#
-# This file is part of < https://github.com/TeamYukki/YukkiChatBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/TeamYukki/YukkiChatBot/blob/master/LICENSE >
-#
-# All rights reserved.
-#
+"""
+CREDIT
+KODE BY [AMANG] <https://t.me/amwang> <https://github.com/amanqs>
+
+HAPUS CREDIT?, WAH KEBANGETAN SIH.
+"""
 
 import asyncio
 from sys import version as pyver
@@ -25,7 +22,7 @@ loop = asyncio.get_event_loop()
 SUDO_USERS = config.SUDO_USER
 
 app = pyrogram.Client(
-    ":YukkiBot:",
+    ":AmangBot:",
     config.API_ID,
     config.API_HASH,
     bot_token=config.BOT_TOKEN,
@@ -38,12 +35,12 @@ grouplist = 1
 async def init():
     await app.start()
 
-    @app.on_message(filters.command(["start", "help"]))
-    async def start_command(_, message: Message):
-        if await mongo.is_banned_user(message.from_user.id):
-            return
-        await mongo.add_served_user(message.from_user.id)
-        await message.reply_text(config.PRIVATE_START_MESSAGE)
+@app.on_message(filters.command(["start", "help"]))
+async def start_command(_, message: Message):
+    if await mongo.is_banned_user(message.from_user.id):
+        return
+    await mongo.add_served_user(message.from_user.id)
+    await message.reply_text("Halo! Saya adalah bot assistant @amwang dan saya siap membantu Anda. Apakah ada yang lain yang dapat saya bantu?")
 
     @app.on_message(
         filters.command("mode") & filters.user(SUDO_USERS)
@@ -306,7 +303,7 @@ async def init():
                     "Failed to send the message, User might have blocked the bot or something wrong happened. Please check logs"
                 )
 
-    print("[LOG] - Yukki Chat Bot Started")
+    print("[LOG] - Amang Chat Bot Started")
     await idle()
 
 
